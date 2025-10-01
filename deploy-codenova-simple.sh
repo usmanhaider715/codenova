@@ -1,33 +1,44 @@
 #!/bin/bash
 
-# CodeNova Portfolio Deployment Script for Hostinger VPS
-# Run this script on your VPS after uploading the project files
+# CodeNova Portfolio - Simple Deployment Script
+# This script deploys CodeNova to your VPS on port 3001
 
-echo "🚀 Starting CodeNova Portfolio Deployment..."
+echo "🚀 CodeNova Portfolio - Simple Deployment"
+echo "========================================"
 
-# Set project directory
-PROJECT_DIR="/root/codenova-portfolio"
+# Set variables
+PROJECT_DIR="/root/websites/codenova"
 BACKEND_DIR="$PROJECT_DIR/backend"
 FRONTEND_DIR="$PROJECT_DIR/frontend"
+VPS_IP=$(curl -s ifconfig.me)
 
-# Check if project directory exists
+echo "🌐 VPS IP: $VPS_IP"
+
+# Create websites directory
+mkdir -p /root/websites
+
+# Remove existing directory if it exists
+if [ -d "$PROJECT_DIR" ]; then
+    echo "🗑️ Removing existing CodeNova directory..."
+    rm -rf $PROJECT_DIR
+fi
+
+# Clone repository
+echo "📥 Cloning CodeNova repository..."
+git clone https://github.com/usmanhaider715/codenova.git $PROJECT_DIR
+
 if [ ! -d "$PROJECT_DIR" ]; then
-    echo "❌ Project directory not found. Please upload your project files first."
+    echo "❌ Failed to clone repository."
     exit 1
 fi
 
-echo "📁 Project directory found: $PROJECT_DIR"
+cd $PROJECT_DIR
 
 # Install dependencies
 echo "📦 Installing dependencies..."
-cd $PROJECT_DIR
 npm install
-
-cd $BACKEND_DIR
-npm install
-
-cd $FRONTEND_DIR
-npm install
+cd $BACKEND_DIR && npm install
+cd $FRONTEND_DIR && npm install
 
 # Build frontend
 echo "🔨 Building frontend..."
@@ -37,14 +48,12 @@ npm run build
 echo "⚙️ Creating environment file..."
 cat > $BACKEND_DIR/.env << EOF
 PORT=3001
-FRONTEND_URL=http://$(curl -s ifconfig.me)
+FRONTEND_URL=http://$VPS_IP
 NODE_ENV=production
 EMAIL_USER=usmanhaiderkhokhar715@gmail.com
 EMAIL_PASS=jdqu rbvn irkc bofg
 APP_PASSWORD=jdqu rbvn irkc bofg
 EOF
-
-echo "✅ Environment file created"
 
 # Create PM2 ecosystem file
 echo "🔧 Creating PM2 configuration..."
@@ -52,7 +61,7 @@ cat > $PROJECT_DIR/ecosystem.config.js << EOF
 module.exports = {
   apps: [
     {
-      name: 'codenova-backend',
+      name: 'codenova',
       script: './backend/server.js',
       cwd: '$PROJECT_DIR',
       env: {
@@ -69,15 +78,12 @@ module.exports = {
 EOF
 
 # Start with PM2
-echo "🚀 Starting application with PM2..."
+echo "🚀 Starting CodeNova with PM2..."
 pm2 start $PROJECT_DIR/ecosystem.config.js
 pm2 save
-pm2 startup
 
 # Create Nginx configuration
 echo "🌐 Configuring Nginx..."
-VPS_IP=$(curl -s ifconfig.me)
-
 cat > /etc/nginx/sites-available/codenova << EOF
 server {
     listen 80;
@@ -107,18 +113,21 @@ EOF
 
 # Enable site
 ln -sf /etc/nginx/sites-available/codenova /etc/nginx/sites-enabled/
-rm -f /etc/nginx/sites-enabled/default
 
 # Test and reload Nginx
 nginx -t && systemctl reload nginx
 
-echo "✅ Deployment completed!"
-echo "🌐 Your website should be accessible at: http://$VPS_IP"
+echo ""
+echo "✅ CodeNova deployment completed!"
+echo "🌐 Your website is live at: http://$VPS_IP"
 echo "📧 Contact form will send emails to: usmanhaiderkhokhar715@gmail.com"
 echo "📱 WhatsApp: https://wa.me/923197331383"
-
-# Show status
-echo "📊 Application Status:"
+echo ""
+echo "📊 Status:"
 pm2 status
-
-echo "🎉 CodeNova Portfolio is now live!"
+echo ""
+echo "📋 Useful Commands:"
+echo "  - Check status: pm2 status"
+echo "  - View logs: pm2 logs codenova"
+echo "  - Restart: pm2 restart codenova"
+echo "  - Update: cd $PROJECT_DIR && git pull && cd frontend && npm run build && pm2 restart codenova"
