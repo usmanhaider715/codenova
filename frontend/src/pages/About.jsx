@@ -11,6 +11,7 @@ import {
   CheckCircle,
   ArrowRight
 } from 'lucide-react'
+import SEO from '../components/SEO'
 
 const About = () => {
   const values = [
@@ -72,6 +73,12 @@ const About = () => {
 
   return (
     <div className="min-h-screen pt-16">
+      <SEO 
+        title="About Us"
+        description="Learn about CodeNova's mission, values, and talented team. We're passionate developers, designers, and innovators creating exceptional digital experiences."
+        keywords="about codenova, software development team, MERN stack developers, cloud architects, mobile app developers, video editors, Pakistan developers"
+        url="/about"
+      />
       {/* Hero Section */}
       <section className="py-20 bg-nova-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
