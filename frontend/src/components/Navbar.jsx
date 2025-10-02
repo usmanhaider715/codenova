@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Code2 } from 'lucide-react'
+import ThemeToggle from './ThemeToggle'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -54,8 +55,8 @@ const Navbar = () => {
                   to={item.path}
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
                     location.pathname === item.path
-                      ? 'text-nova-blue bg-nova-gray-light'
-                      : 'text-nova-text-light hover:text-nova-blue hover:bg-nova-gray-light'
+                      ? 'text-nova-blue bg-nova-light-accent dark:bg-nova-gray-light'
+                      : 'text-nova-light-text-muted dark:text-nova-text-light hover:text-nova-blue hover:bg-nova-light-accent dark:hover:bg-nova-gray-light'
                   }`}
                 >
                   {item.name}
@@ -64,8 +65,9 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* Theme Toggle & CTA Button */}
+          <div className="hidden md:flex items-center space-x-4">
+            <ThemeToggle />
             <Link
               to="/contact"
               className="btn-primary"
@@ -74,11 +76,12 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile menu button & theme toggle */}
+          <div className="md:hidden flex items-center space-x-2">
+            <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-nova-text-light hover:text-nova-blue transition-colors duration-300"
+              className="text-nova-light-text-muted dark:text-nova-text-light hover:text-nova-blue transition-colors duration-300"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -103,8 +106,8 @@ const Navbar = () => {
                   onClick={() => setIsOpen(false)}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-all duration-300 ${
                     location.pathname === item.path
-                      ? 'text-nova-blue bg-nova-gray-light'
-                      : 'text-nova-text-light hover:text-nova-blue hover:bg-nova-gray-light'
+                      ? 'text-nova-blue bg-nova-light-accent dark:bg-nova-gray-light'
+                      : 'text-nova-light-text-muted dark:text-nova-text-light hover:text-nova-blue hover:bg-nova-light-accent dark:hover:bg-nova-gray-light'
                   }`}
                 >
                   {item.name}
@@ -113,7 +116,7 @@ const Navbar = () => {
               <Link
                 to="/contact"
                 onClick={() => setIsOpen(false)}
-                className="block px-3 py-2 rounded-md text-base font-medium text-nova-blue hover:bg-nova-gray-light transition-all duration-300"
+                className="block px-3 py-2 rounded-md text-base font-medium text-nova-blue hover:bg-nova-light-accent dark:hover:bg-nova-gray-light transition-all duration-300"
               >
                 Start Your Project
               </Link>

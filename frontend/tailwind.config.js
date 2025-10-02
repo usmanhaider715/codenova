@@ -4,9 +4,11 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
+        // Dark theme colors
         'nova-dark': '#0a0a0f',
         'nova-darker': '#050508',
         'nova-blue': '#00d4ff',
@@ -16,6 +18,14 @@ export default {
         'nova-gray-light': '#16213e',
         'nova-text': '#e2e8f0',
         'nova-text-light': '#94a3b8',
+        
+        // Light theme colors
+        'nova-light': '#ffffff',
+        'nova-light-gray': '#f8fafc',
+        'nova-light-border': '#e2e8f0',
+        'nova-light-text': '#1e293b',
+        'nova-light-text-muted': '#64748b',
+        'nova-light-accent': '#f1f5f9',
       },
       fontFamily: {
         'nova': ['Inter', 'system-ui', 'sans-serif'],

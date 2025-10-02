@@ -64,12 +64,11 @@ const Hero = () => {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-nova-light via-nova-light-gray to-nova-light-accent dark:from-nova-dark dark:via-nova-gray dark:to-nova-gray-light transition-colors duration-500">
       {/* Animated Background */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full"
-        style={{ background: 'linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%)' }}
+        className="absolute inset-0 w-full h-full opacity-60 dark:opacity-100"
       />
 
       {/* Gradient Overlay */}
@@ -103,7 +102,7 @@ const Hero = () => {
           >
             <span className="text-gradient">Igniting Ideas.</span>
             <br />
-            <span className="text-nova-text">Building Futures.</span>
+            <span className="text-nova-light-text dark:text-nova-text">Building Futures.</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -111,7 +110,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-lg sm:text-xl md:text-2xl text-nova-text-light max-w-3xl mx-auto leading-relaxed"
+            className="text-lg sm:text-xl md:text-2xl text-nova-light-text-muted dark:text-nova-text-light max-w-3xl mx-auto leading-relaxed"
           >
             We craft exceptional digital experiences through cutting-edge technology, 
             innovative design, and unwavering commitment to your success.
@@ -168,7 +167,7 @@ const Hero = () => {
                 className="text-center"
               >
                 <div className="text-2xl md:text-3xl font-bold text-gradient">{stat.number}</div>
-                <div className="text-sm text-nova-text-light mt-1">{stat.label}</div>
+                <div className="text-sm text-nova-light-text-muted dark:text-nova-text-light mt-1">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
