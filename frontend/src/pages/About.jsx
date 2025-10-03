@@ -126,7 +126,7 @@ const About = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="btn-primary flex items-center space-x-2"
+                  className="btn-primary flex items-center justify-center space-x-2"
                 >
                   <span>Start Your Project</span>
                   <ArrowRight className="h-5 w-5" />
