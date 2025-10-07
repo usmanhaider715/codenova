@@ -46,25 +46,25 @@ const About = () => {
 
   const team = [
     {
-      name: 'Alex Johnson',
+      name: 'Usman Haider',
       role: 'CEO & Lead Developer',
       image: '/api/placeholder/200/200',
       description: 'Full-stack developer with 8+ years of experience in MERN stack and cloud architecture.'
     },
     {
-      name: 'Sarah Chen',
+      name: 'Abdul Rehman',
       role: 'CTO & Cloud Architect',
       image: '/api/placeholder/200/200',
       description: 'Cloud solutions expert specializing in AWS, Azure, and DevOps practices.'
     },
     {
-      name: 'Mike Rodriguez',
+      name: 'Muhammad Zubair',
       role: 'Mobile Development Lead',
       image: '/api/placeholder/200/200',
       description: 'Mobile app specialist with expertise in React Native, Flutter, and native development.'
     },
     {
-      name: 'Emily Davis',
+      name: 'Usman Haider',
       role: 'Creative Director',
       image: '/api/placeholder/200/200',
       description: 'Video editing and creative media expert with a passion for visual storytelling.'
