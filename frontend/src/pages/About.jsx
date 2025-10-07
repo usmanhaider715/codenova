@@ -48,25 +48,25 @@ const About = () => {
     {
       name: 'Usman Haider',
       role: 'CEO & Lead Developer',
-      image: '/api/placeholder/200/200',
+      image: '/usman_haider.jpg',
       description: 'Full-stack developer with 8+ years of experience in MERN stack and cloud architecture.'
     },
     {
       name: 'Abdul Rehman',
       role: 'CTO & Cloud Architect',
-      image: '/api/placeholder/200/200',
+      image: '/abdul_rehman.jpg',
       description: 'Cloud solutions expert specializing in AWS, Azure, and DevOps practices.'
     },
     {
       name: 'Muhammad Zubair',
       role: 'Mobile Development Lead',
-      image: '/api/placeholder/200/200',
+      image: '/Muhammad_zubair.jpeg',
       description: 'Mobile app specialist with expertise in React Native, Flutter, and native development.'
     },
     {
       name: 'Usman Haider',
       role: 'Creative Director',
-      image: '/api/placeholder/200/200',
+      image: '/usman_haider.jpg',
       description: 'Video editing and creative media expert with a passion for visual storytelling.'
     }
   ]
@@ -235,10 +235,12 @@ const About = () => {
                 whileHover={{ y: -10 }}
                 className="glass-effect rounded-2xl p-6 hover-lift text-center"
               >
-                <div className="w-24 h-24 rounded-full bg-gradient-to-r from-nova-blue to-nova-purple flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white font-bold text-xl">
-                    {member.name.split(' ').map(n => n[0]).join('')}
-                  </span>
+                <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden">
+                  <img 
+                    src={member.image} 
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <h3 className="text-lg font-bold text-nova-text mb-2">{member.name}</h3>
                 <p className="text-nova-blue font-medium mb-3">{member.role}</p>
